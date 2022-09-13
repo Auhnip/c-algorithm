@@ -27,7 +27,7 @@ int th_tree_insert(THREAD_TREE *tree, void *data);
 
 void th_tree_destroy(THREAD_TREE *tree);
 
-void th_tree_nlr_thread(THREAD_TREE *tree);
+void th_tree_lnr_thread(THREAD_TREE *tree);
 
 void th_tree_print(THREAD_TREE *tree, void (*print_data)(void *), int max_depth);
 

@@ -23,7 +23,7 @@ int main()
 	}
 
 	th_tree_print(tree, print_int, 6);
-	th_tree_nlr_thread(tree);
+	th_tree_lnr_thread(tree);
 	th_tree_print(tree, print_int, 6);
 
 	th_tree_print_ordered(tree, print_int);

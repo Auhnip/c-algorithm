@@ -66,12 +66,12 @@ static int insert(THREAD_TREE_NODE **node, void *data, THREAD_TREE *tree)
 	return 0;
 }
 
-static THREAD_TREE_NODE *nlr_thread(THREAD_TREE_NODE *root, THREAD_TREE_NODE *prev)
+static THREAD_TREE_NODE *lnr_thread(THREAD_TREE_NODE *root, THREAD_TREE_NODE *prev)
 {
 	if (!root)
 		return prev;
 
-	prev = nlr_thread(root->left, prev);
+	prev = lnr_thread(root->left, prev);
 
 	if (root->left == NULL)
 	{
@@ -85,7 +85,7 @@ static THREAD_TREE_NODE *nlr_thread(THREAD_TREE_NODE *root, THREAD_TREE_NODE *pr
 		prev->rtag = 1;
 	}
 
-	return nlr_thread(root->right, root);
+	return lnr_thread(root->right, root);
 }
 
 static void print(THREAD_TREE_NODE *root,
@@ -139,7 +139,7 @@ static void print(THREAD_TREE_NODE *root,
 
 static THREAD_TREE_NODE *first_node(THREAD_TREE_NODE *root)
 {
-	while (root->left && root->ltag == 0)
+	while (root->ltag == 0)
 		root = root->left;
 
 	return root;
@@ -176,9 +176,9 @@ void th_tree_destroy(THREAD_TREE *tree)
 	free(tree);
 }
 
-void th_tree_nlr_thread(THREAD_TREE *tree)
+void th_tree_lnr_thread(THREAD_TREE *tree)
 {
-	THREAD_TREE_NODE *prev = nlr_thread(tree->root, NULL);
+	THREAD_TREE_NODE *prev = lnr_thread(tree->root, NULL);
 
 	prev->right = NULL;
 	prev->rtag = 1;
